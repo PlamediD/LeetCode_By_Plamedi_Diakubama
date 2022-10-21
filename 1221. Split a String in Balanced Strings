@@ -1,0 +1,55 @@
+/*Description
+1221. Split a String in Balanced Strings
+
+Balanced strings are those that have an equal quantity of 'L' and 'R' characters.
+
+Given a balanced string s, split it into some number of substrings such that:
+
+Each substring is balanced.
+Return the maximum number of balanced strings you can obtain.
+
+ 
+
+Example 1:
+
+Input: s = "RLRRLLRLRL"
+Output: 4
+Explanation: s can be split into "RL", "RRLL", "RL", "RL", each substring contains same number of 'L' and 'R'.
+
+Example 2:
+
+Input: s = "RLRRRLLRLL"
+Output: 2
+Explanation: s can be split into "RL", "RRRLLRLL", each substring contains same number of 'L' and 'R'.
+Note that s cannot be split into "RL", "RR", "RL", "LR", "LL", because the 2nd and 5th substrings are not balanced.
+*/
+
+/*
+My approach: Greedy
+Traverse the string from left to right. Every character we encoutered, we check wheter is it a L or R. Increment balanced when we encouter one and 
+decrement when we encouter the otehr one. Whenever the value of balanced is 0, then we know that we can split: incrment the variable split. 
+Return split as the number of possible split 
+
+Time complexity : O(n) 
+Space complexity : O(1) 
+
+*/
+
+public class Solution {
+    public int BalancedStringSplit(string s) {
+        int balanced=0, split=0; 
+        for(int i=0; i<s.Length; i++){
+            if(s[i]=='L'){
+                balanced++; 
+            }
+            if(s[i]=='R'){
+                balanced--; 
+            }
+            if(balanced==0){
+                split++;
+            }
+        }
+        return split; 
+        
+    }
+}
