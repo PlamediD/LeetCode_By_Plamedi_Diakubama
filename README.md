@@ -1,4 +1,4 @@
-# LeetCode_Greedy
+# LeetCode
 This will contains leetcode problems that are solved using the greedy algorithm. 
 
 List of problems solved : 
