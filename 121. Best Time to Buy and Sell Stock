@@ -1,0 +1,84 @@
+/*
+Description: 
+
+You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+ 
+
+Example 1:
+
+Input: prices = [7,1,5,3,6,4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+Example 2:
+
+Input: prices = [7,6,4,3,1]
+Output: 0
+Explanation: In this case, no transactions are done and the max profit = 0.
+*/public class Solution {
+    public int MaxProfit(int[] prices) {
+
+         int profit = 0, lsf = prices[0];
+        for(int i = 0; i < prices.Length; ++i)
+        {
+          if(prices[i] < lsf)
+              lsf = prices[i];
+          if(prices[i] - lsf > profit)
+              profit = prices[i] - lsf;
+        }
+        return profit;
+   }
+}
+
+Time complexity O(n) 
+
+/*
+A slightly different version: https://www.geeksforgeeks.org/stock-buy-sell/
+
+You are allowed to buy on multiple days. However, you cannot buy on a day that is passed already.
+Examples:
+
+Input: arr[] = {100, 180, 260, 310, 40, 535, 695}
+Output: 865
+Explanation: Buy the stock on day 0 and sell it on day 3 => 310 – 100 = 210
+                       Buy the stock on day 4 and sell it on day 6 => 695 – 40 = 655
+                       Maximum Profit  = 210 + 655 = 865
+
+Input: arr[] = {4, 2, 2, 2, 4}
+Output: 2
+Explanation: Buy the stock on day 1 and sell it on day 4 => 4 – 2 = 2
+                       Maximum Profit  = 2
+*/
+
+//Solution in O(n) time complexity 
+/*
+In this approach, we just need to find the next greater element and subtract it from the current element so that the difference keeps increasing until we reach a minimum. If the sequence is a decreasing sequence, so the maximum profit possible is 0.
+
+Follow the steps below to solve the problem:
+
+maxProfit = 0
+if price[i] > price[i – 1]
+maxProfit = maxProfit + price[i] – price[i – 1]
+Below is the implementation of the above approach:
+*/
+static int maxProfit(int[] prices, int size)
+    {
+ 
+        // maxProfit adds up the difference
+        // between adjacent elements if they
+        // are in increasing order
+        int maxProfit = 0;
+ 
+        // The loop starts from 1 as its
+        // comparing with the previous
+        for (int i = 1; i < size; i++)
+            if (prices[i] > prices[i - 1])
+                maxProfit += prices[i] - prices[i - 1];
+ 
+        return maxProfit;
+    }
