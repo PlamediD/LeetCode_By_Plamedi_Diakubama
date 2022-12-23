@@ -1,0 +1,30 @@
+/*Description: 
+217. Contains Duplicate
+
+Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+
+
+//Solution using C#
+//First sort the array 
+//then compare consecutive elements
+//Sorting will help make it faster because if there are any duplicate integers, they will be consecutive after sorting.
+//Time complexity:  O(n log n)
+Sorting is O(n log n) and the sweeping is O(n)
+The entire algorithm is dominated by the sorting step, which is O(n log n).
+*/
+public class Solution {
+    public bool ContainsDuplicate(int[] nums) {
+       Array.Sort(nums); 
+        
+        for(int i=0; i<nums.Length-1; i++){
+        
+                if(nums[i]==nums[i+1]){
+                    return true; 
+                }
+            }
+        
+        
+        return false; 
+        
+    }
+}
