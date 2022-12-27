@@ -1,0 +1,80 @@
+/*Description: 
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, 
+it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+
+Given a string s, return true if it is a palindrome, or false otherwise.
+
+Example 1:
+
+Input: s = "A man, a plan, a canal: Panama"
+Output: true
+Explanation: "amanaplanacanalpanama" is a palindrome.
+
+
+*/
+/* First solution: I came up with it on my own
+-Create a new string( empty string) : Pali 
+- traverse the given string and everytime an element is a letter or a digit, add it to the new string
+- convert all element in pali to lowercase 
+- use two pointers ( left and right/ start and end ) to traverse the string
+- left start at 0 and increases, right starts at lenght-1 and decreases
+- compare element at index left with element at index right
+- if they are different, break the loop and return false
+-else, update left & right and continue on 
+- if we reach the point where left>right, then it is a palindrome so return true
+
+Space complexity: O(n)
+Time complexity: O(n)
+*/
+public class Solution {
+    public bool IsPalindrome(string s) {
+        if(s.Length==0){ return true; }
+        
+        string pali= ""; 
+        for(int i=0; i<s.Length; i++){
+            if(Char.IsLetterOrDigit(s[i])){
+                pali+=s[i];
+            }
+            
+        }
+        pali=pali.ToLower();
+        Console.WriteLine(pali);
+       
+        pali=pali.ToLower();
+        int left=0; 
+        int right= pali.Length-1; 
+        while(left<right){
+            if(pali[left]!=pali[right])return false;
+            right--;
+            left++;      
+                
+            
+        }
+        return true; 
+        
+    }
+}
+
+/*
+Second solution: Seems to be faster, but I do not fully understand it yet
+Space complexity: O(1)
+Time complexity: O(n)
+public class Solution {
+    public bool IsPalindrome(string s) {
+        for (int left = 0, right = s.Length - 1; left < right; left++, right--) {
+           while(left<right && !Char.IsLetterOrDigit(s[left])){
+               left++;
+           }
+            while(left<right && !Char.IsLetterOrDigit(s[right])){
+               right--;
+           }
+           if(char.ToLower(s[left])!=char.ToLower(s[right])){
+               return false; 
+           }
+           
+       }
+        return true; 
+        
+    }
+}
+*/
