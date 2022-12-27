@@ -1,0 +1,58 @@
+/*
+Description: 
+Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+ex 1 :
+Input: head = [1,1,2]
+Output: [1,2]
+
+ex 2 : 
+Input: head = [1,1,2,3,3]
+Output: [1,2,3]
+
+
+*/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int val=0, ListNode next=null) {
+ *         this.val = val;
+ *         this.next = next;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode DeleteDuplicates(ListNode head) {
+
+         /* returns the head if the list is empty */
+         if(head == null) {
+             return head;
+         }
+        
+        ListNode temp = head;
+
+         // Traverse the list till the last node 
+        while (temp.next != null)
+        {
+            //Compare current node with the next node 
+            //if duplicate, move the pointer to skip the duplicate element 
+            if (temp.val == temp.next.val)
+            {
+                temp.next = temp.next.next;
+            }
+
+            // advance if no deletion
+            else
+            {
+                temp = temp.next;
+            }
+        }
+            return head;
+        
+    }
+}
+
+//Time Complexity: O(n) where n is the number of nodes in the given linked list.
+//Auxiliary Space: O(1) , as there is no extra space used.
