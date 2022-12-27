@@ -1,0 +1,81 @@
+/*
+Description: 
+Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+Symbol       Value
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+
+
+Example 1:
+
+Input: s = "III"
+Output: 3
+Explanation: III = 3.
+Example 2:
+
+Input: s = "LVIII"
+Output: 58
+Explanation: L = 50, V= 5, III = 3.
+Example 3:
+
+Input: s = "MCMXCIV"
+Output: 1994
+Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
+
+*/
+
+//Time complexity: O(n): n length of the given string 
+//Space complexity: O(n): n is the length of the given string. We need to create a dict to store teh letter and their corresponding value 
+
+
+public class Solution {
+    public int RomanToInt(string s) {
+
+        //if string is empty 
+        
+        if(s == null || s.Length == 0)
+            return 0;
+        
+        //create a dict and add each string with its corresponding value 
+        Dictionary<char,int> dic = new Dictionary<char,int>()
+        {
+            {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50}, {'C', 100}, {'D', 500}, {'M', 1000}
+        };
+        
+        
+        //initialize the value result to 0 
+        int res = 0;
+
+        //traverse the entire given string
+        for(int i = 0; i < s.Length; i++)
+        {
+        
+            if(i + 1 < s.Length)
+            {
+                char currChar = s[i];
+                char nextChar = s[i + 1];
+                if(dic[currChar] >= dic[nextChar]){
+                    res += dic[currChar];
+                }
+                    
+
+                //if the previous letter is < the next one ( e.g: IV) 
+                //then we add the difference
+                else
+                {
+                    res += (dic[nextChar] - dic[currChar]);
+                    i++;
+                }
+            }
+            else
+                res += dic[s[i]];
+        }
+        
+        return res;
+    }
+}
