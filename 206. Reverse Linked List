@@ -1,0 +1,41 @@
+/*
+Description:
+https://leetcode.com/problems/reverse-linked-list/description/?envType=study-plan&id=level-1
+Given the head of a singly linked list, reverse the list, and return the reversed list.
+Input: head = [1,2,3,4,5]
+Output: [5,4,3,2,1]
+
+*/
+/*Find explanation on : 
+https://www.geeksforgeeks.org/reverse-a-linked-list/
+I implemeted the iterative method ( 3 pointers method) 
+Time compelxity: O(N) where n= number of elements
+Space complexity: O(1) 
+
+*/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int val=0, ListNode next=null) {
+ *         this.val = val;
+ *         this.next = next;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode ReverseList(ListNode head) {
+        
+         ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
+        }
+        return prev;
+    }
+}
