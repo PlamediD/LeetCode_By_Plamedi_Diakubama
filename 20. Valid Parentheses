@@ -1,0 +1,85 @@
+//20. Valid Parentheses
+
+/*
+Description: 
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+
+
+Example 1:
+
+Input: s = "()"
+Output: true
+Example 2:
+
+Input: s = "()[]{}"
+Output: true
+Example 3:
+
+Input: s = "(]"
+Output: false
+*/
+/*
+Language used: C#
+Algo: create a dictionary that will contains the three types of parenthesis as a key (the opening) and the closing as a value.
+for ex: 
+key:" (" will have value ")"
+key "[" will have value "]"
+
+create a stack
+
+*/
+
+//code below: 
+public class Solution {
+    public bool IsValid(string s) {
+        
+        //create a dictionary that will contains char as key and char as value
+        //it will contain the three types parenthesis that we will be dealing with 
+        Dictionary <char, char> dic= new Dictionary <char, char>();
+        dic.Add(')', '(');
+        dic.Add(']', '[');
+        dic.Add('}', '{');
+        
+       
+        
+        //i starts at 0 till the end of the strings 
+        int i = 0;
+    //initialize the stack 
+    //we use stack because we want to keep track of the latest open parenthesis type 
+    Stack<char> stack = new Stack<char>();
+    while (i < s.Length)
+    {
+        
+        //if the current chareacter is a closing bracket
+        if (dic.ContainsKey(s[i]))
+        {
+            
+            //if stcak is already empty then it means that that closing won't get a match
+            //so it is invalid
+            if (stack.Count == 0) return false;
+            
+            //whenever we encouter a closing )]}, 
+            //check if the closing parenthesis match the top of the stack
+            //if not, then it is invalid
+            if (dic[s[i]] != stack.Pop())
+                return false;
+        }
+        
+        //if character is an opening parenthesis/bracket ({[, add it to the stack 
+        else
+            stack.Push(s[i]);
+
+        i++;
+    }
+        
+        //if at the end stack is empty, then it is valid string
+        //if it is not empty, then invalid
+        return stack.Count==0;
+        
+    }
+}
