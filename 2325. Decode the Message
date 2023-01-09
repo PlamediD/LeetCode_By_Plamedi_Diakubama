@@ -1,0 +1,50 @@
+/*
+2325. Decode the Message
+
+Description: 
+https://leetcode.com/problems/decode-the-message/
+go read it it quite confuising and long LOL 
+
+*/
+
+//Code below: 
+public class Solution {
+    public string DecodeMessage(string key, string message) {
+        Dictionary <char,char> keyOrder= new Dictionary<char,char>();
+        string alpha = "abcdefghijklmnopqrstuvwxyz"; //declare the alphabet
+        string ans = "";
+        
+        for (int i =0; i<alpha.Length; i++)
+        {
+             for(int j =i; j<key.Length;j++)
+             {
+                 if(key[j]!=' '&& keyOrder.ContainsKey(key[j]) == false){
+                     
+                     //if it is not a white space and char is not already present, then add it
+                     keyOrder.Add(key[j], alpha[i]); 
+                     
+                     // after add the key, return to the next alpha
+                     //this is to allow it to get out of the second for loop
+                     //and go back to the first one and update i 
+                     j = key.Length; 
+                     
+                 }
+             }
+        }
+        
+        for (int i = 0; i < message.Length; i++)
+        {
+            if (message[i] == ' '){
+                ans += " ";
+                
+            }
+                
+            else{
+                // print each char in dictionary using the key as a lead.
+                ans += keyOrder[message[i]]; 
+            }
+        }
+
+        return ans;
+    }
+}
