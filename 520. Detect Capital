@@ -1,0 +1,67 @@
+/*
+520. Detect Capital
+
+Description: 
+We define the usage of capitals in a word to be right when one of the following cases holds:
+
+  All letters in this word are capitals, like "USA".
+  All letters in this word are not capitals, like "leetcode".
+  Only the first letter in this word is capital, like "Google".
+  Given a string word, return true if the usage of capitals in it is right.
+
+ 
+Example 1:
+
+Input: word = "USA"
+Output: true
+Example 2:
+
+Input: word = "FlaG"
+Output: false
+
+*/
+
+//Language used: C#
+//time complexity: O(n)
+//space complexity: O(1)
+
+//Code below
+public class Solution {
+    public bool DetectCapitalUse(string word) {
+        
+        
+        int size= word.Length; 
+        if(size<=1){
+            return true;
+        }
+        
+        //if the first two letters are upper case, then the entire word needs to be upper case to be valid. 
+        //if at any point, one is lower case, we know it is false automatically 
+        //if we traverse the entire remaining part of the word without breaking the loop, 
+        //then it will return true
+        if(Char.IsUpper(word[0])&& Char.IsUpper(word[1])){
+            for(int i=2; i<size; i++){
+                
+                if( Char.IsLower(word[i])){
+                    return false; 
+                }
+            }
+        }
+        
+        //case 1: it starts with a capital letter but the next one is not capital 
+        // It can be that everything remaining is lower case, then it will be valid
+        //case 2: it starts with a lower case letter
+        //here we will then traverse the word starting from index 1 and
+        //if at any point we find a upper case char then we break the loop and return false
+        //if till the end we do not find a capital letter then the word is valid 
+        
+        else{
+            for(int i=1; i<size; i++){
+                if(Char.IsUpper(word[i])){
+                    return false; 
+                }
+            }
+        }
+        return true; 
+    }
+}
