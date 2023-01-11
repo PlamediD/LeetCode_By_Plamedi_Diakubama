@@ -1,0 +1,82 @@
+/*
+848. Shifting Letters
+
+Description: 
+
+You are given a string s of lowercase English letters and an integer array shifts of the same length.
+
+Call the shift() of a letter, the next letter in the alphabet, (wrapping around so that 'z' becomes 'a').
+
+For example, shift('a') = 'b', shift('t') = 'u', and shift('z') = 'a'.
+Now for each shifts[i] = x, we want to shift the first i + 1 letters of s, x times.
+
+Return the final string after all such shifts to s are applied.
+
+ 
+
+Example 1:
+
+Input: s = "abc", shifts = [3,5,9]
+Output: "rpl"
+Explanation: We start with "abc".
+After shifting the first 1 letters of s by 3, we have "dbc".
+After shifting the first 2 letters of s by 5, we have "igc".
+After shifting the first 3 letters of s by 9, we have "rpl", the answer.
+*/
+
+/*
+Algo: 
+Iterate backwards from the last element and calculate shift for each index by adding shift for the given index and sum of all following shifts from i+1 to the end of shifts array
+Iterate string and shift each character by the given index modulo number of characters between 'a' and 'z' (inclusive)
+Join both loops into one iteration
+*/
+
+//Code below: 
+public class Solution {
+    public string ShiftingLetters(string S, int[] shifts)
+    {
+	int len = S.Length;
+	const int mod = 'z' - 'a' + 1;
+	char[] res = new char[len];
+
+	for (int i = len - 1; i >= 0; i--)
+	{
+		res[i] = (char)((S[i] - 'a' + shifts[i]) % mod + 'a');
+		if(i > 0)
+			shifts[i - 1] += shifts[i] % mod;
+	}
+
+	return new string(res);
+    }
+}
+
+//Second approach 
+public class Solution {
+    public string ShiftingLetters(string s, int[] shifts) 
+    {
+        char[] chars = s.ToCharArray();
+        int shift = 0;
+
+        for (int i= shifts.Length -1; i >= 0; i--)
+        {
+            // Maintain previous shifts
+            shift += shifts[i];
+            
+            // Wrap around if required
+            // 26 = the total number of alphabets
+            shift %= 26;
+
+            int t = chars[i] + shift;
+            while (t > 122)
+            {
+                // Restore to a-z
+                / ASCII a ~ z = 65 ~ 122
+                t -= 26;
+            }
+
+            chars[i] = (char)t;
+        }       
+
+        return new string(chars);
+    }
+}
