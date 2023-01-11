@@ -1,0 +1,43 @@
+/*
+Alggo: 
+First, we define the search space using two boundary indexes, left and right, all possible indexes are within the inclusive range [left, right].
+We shall continue searching over the search space as long as it is not empty. A general way is to use a while loop with the condition left <= right, 
+so we can break out of this loop if we empty the range 
+The next step is to find the 'pivot point', the middle index that divides the search space into two halves. 
+We need to compare the value at the middle index nums[mid] with target, the purpose of this step is to cut one half that is guaranteed not to contain target.
+
+If nums[mid] = target, it means we find target, and the job is done! We can break the loop by returning mid.
+If nums[mid] < target, combined with the array is sorted, we know that all values in the left half are smaller than target, 
+so we can safely cut this half by letting left = mid + 1.
+If nums[mid] > target, it means all values in the right half are larger than target and can be cut safely!
+
+Time complexity: O(log⁡n) where n= size of the given array 
+
+nums is divided into half each time. 
+In the worst-case scenario, we need to cut nums until the range has no element, and it takes logarithmic time to reach this break condition.
+
+Space complexity: O(1)
+
+During the loop, we only need to record three indexes, left, right, and mid, they take constant space. 
+*/
+public class Solution {
+    public int Search(int[] nums, int target) {
+        int left=0;
+        int right=nums.Length-1;
+        int mid=0; 
+        while(left<=right){
+            mid= (left+right)/2;
+            if(target<nums[mid]){
+                right=mid-1;
+            }
+            else if(target>nums[mid]){
+                left=mid+1;
+            }
+            else {
+                return mid; 
+            }
+        }
+        return -1;
+        
+    }
+}
