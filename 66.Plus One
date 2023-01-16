@@ -1,0 +1,65 @@
+/*
+66.Plus One
+
+Description: 
+
+You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
+
+Increment the large integer by one and return the resulting array of digits.
+
+ 
+
+Example 1:
+
+Input: digits = [1,2,3]
+Output: [1,2,4]
+Explanation: The array represents the integer 123.
+Incrementing by one gives 123 + 1 = 124.
+Thus, the result should be [1,2,4].
+Example 2:
+
+Input: digits = [4,3,2,1]
+Output: [4,3,2,2]
+Explanation: The array represents the integer 4321.
+Incrementing by one gives 4321 + 1 = 4322.
+Thus, the result should be [4,3,2,2].
+
+*/
+
+/*
+Language used: C#
+Time complexity: O(n)
+Space complexity: 
+
+*/
+public class Solution {
+    
+    /*algo: 
+    start traversing at the end
+    if number at current index is less than nine,
+    update element at that index( add 1 to the current number) and return array
+    
+    if number at index i=9, change that number to 0 and continue traversing the array 
+    so that we can add the 1 to the number at the previous index
+    
+    iif at the end of the loop, the array is not returned yet, than it means the 
+    entire array contains only 9 as number at each index
+    in that case, simply create an new array with size = given array size +1
+    the array will be filled with zero initially
+    change the first element( at index 0 ) to 1 and reutrn the array 
+    */    
+    public int[] PlusOne(int[] digits) {
+        int size=digits.Length; 
+        for(int i=size-1; i>=0;i--){
+            if(digits[i]<9){
+                digits[i]=digits[i]+1;
+                return digits; 
+            }
+             digits[i]=0;
+        }
+        
+        int[] result= new int[size+1];
+        result[0]=1;
+        return result; 
+    }
+}
