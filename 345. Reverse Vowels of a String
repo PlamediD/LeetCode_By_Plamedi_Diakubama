@@ -1,0 +1,72 @@
+/*
+345. Reverse Vowels of a String
+Description: 
+Given a string s, reverse only all the vowels in the string and return it.
+
+The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both cases.
+ 
+
+Example 1:
+
+Input: s = "hello"
+Output: "holle"
+
+
+Example 2:
+
+Input: s = "leetcode"
+Output: "leotcede"
+
+*/
+
+/*
+Language used: C#
+Time complexity: O(n)
+??Space complexity: O(10)~O(1) 
+Algo: create an array of char and save all characters in s 
+create a hash set and save all possible English vowels ( both upper and lower case~ aeiouAEIOU) 
+inititialize two pointers: start = 0  & end= s.Length-1 
+as long as start< end( as long as they have not cross yet): 
+  - check if the hash set contians the char at index start, if it doesn't increase start by 1
+  - check if the hash set contains the char at index end, if it doesn't, decrease end by 1
+  - else( we have encounter a vowel at both start and end indexes)so,  we do the swap
+*/
+
+//Code below
+public class Solution {
+    
+    
+    public string ReverseVowels(string s) {
+        
+        //save all characters in string s in an array 
+        char[] a= new char[s.Length];
+        a= s.ToCharArray();
+       
+        //create a hash set and add all valid vowels( upper & lower case) 
+        HashSet<char> vowels= new HashSet<char>("aeiouAEIOU");
+        
+        //two pointers: start & end
+        int start=0;
+        int end=a.Length-1;
+       
+        //as long as we have not reached the end ( start is still less then end)
+        while(start<end){
+            
+            //if the character is not a vowel increase start( move on to the next character)
+            if (!vowels.Contains(a[start])) start++;
+            
+            //if character at the end is not a vowel, decrease end
+            else if (!vowels.Contains(a[end])) end--;
+            
+            //if we encouter vowel, swap 
+            else
+            {
+                char t = a[start];
+                a[start++] = a[end];
+                a[end--] = t;
+            }
+        }
+        
+        return new string(a);
+    }
+}
