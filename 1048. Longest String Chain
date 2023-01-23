@@ -1,0 +1,78 @@
+/*1048. Longest String Chain
+
+Description: 
+You are given an array of words where each word consists of lowercase English letters.
+
+wordA is a predecessor of wordB if and only if we can insert exactly one letter anywhere in wordA without changing the order of the other characters to make it equal to wordB.
+
+For example, "abc" is a predecessor of "abac", while "cba" is not a predecessor of "bcad".
+A word chain is a sequence of words [word1, word2, ..., wordk] with k >= 1, where word1 is a predecessor of word2, word2 is a predecessor of word3, and so on. A single word is trivially a word chain with k == 1.
+
+Return the length of the longest possible word chain with words chosen from the given list of words.
+
+ 
+
+Example 1:
+
+Input: words = ["a","b","ba","bca","bda","bdca"]
+Output: 4
+Explanation: One of the longest word chains is ["a","ba","bda","bdca"].
+Example 2:
+
+Input: words = ["xbc","pcxbcf","xb","cxbc","pcxbc"]
+Output: 5
+Explanation: All the words can be put in a word chain ["xb", "xbc", "cxbc", "pcxbc", "pcxbcf"].
+Example 3:
+
+Input: words = ["abcd","dbqca"]
+Output: 1
+Explanation: The trivial word chain ["abcd"] is one of the longest word chains.
+["abcd","dbqca"] is not a valid word chain because the ordering of the letters is changed.
+*/
+
+/*
+ use a hashset to keep track of what words are in the array;
+ sort the words by the length of the words;
+ use DFS; starting from the longest word; delete one character at a time and check whether the other word exists;
+ if exist, continue to check for the word without one char;
+ mark the words visited; do not visit the same word again.
+ keep the longest chain as maxlen;
+ 
+    */
+    public class Solution {
+    HashSet<string>hashset;
+    int maxlen = 0;
+    public int LongestStrChain(string[] words) {
+    
+    //sort all elements in the array based on the length of each 
+        Array.Sort(words,(a,b)=>b.Length-a.Length);
+        
+        //hashset store the string and the current chain length( max chain length starting from that particular string) for future reference
+        hashset = new HashSet<string>(words);
+        foreach(string str in words)
+        {
+            
+            
+            if (hashset.Contains(str))
+                DFS(str,1);
+        }
+        return maxlen;
+    }
+    public void DFS(string s, int depth)
+    {
+    
+        maxlen = Math.Max(maxlen,depth);
+        for(int i = 0; i < s.Length; i++)
+        {
+            //remove a character and check if the remaining is a string present in the set
+       
+            string str = s.Remove(i,1);
+            
+            if (hashset.Contains(str))
+            {
+                hashset.Remove(str);
+                DFS(str, depth+1);
+            }      
+        }
+    }
+}
