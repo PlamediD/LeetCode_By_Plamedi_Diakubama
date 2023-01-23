@@ -1,0 +1,70 @@
+/*
+387. First Unique Character in a String
+Description: 
+
+Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
+ 
+
+Example 1:
+
+Input: s = "leetcode"
+Output: 0
+Example 2:
+
+Input: s = "loveleetcode"
+Output: 2
+Example 3:
+
+Input: s = "aabb"
+Output: -1
+
+*/
+
+/*
+Language used: C#
+Time complexity:O(n) 
+Space complexity: 
+Algo: 
+Create a dictionary and traverse the estring saving each character adn their frequency. 
+When traversing, if th echaracter is not already present in the dictionary, add it with value set to 1
+if it is already present, increase value by 1. 
+Then traverse the string again and check which character has value 1
+Once you find one, return its index
+if at the end of the string no unique character is found, return -1
+
+
+*/
+
+//code below
+public class Solution {
+    public int FirstUniqChar(string s) {
+        
+        //create a dictionary to save all characters in the string and their frequency
+        Dictionary <char,int> allCharacters= new Dictionary <char, int>();
+        for(int i=0; i<s.Length; i++){
+            char ch = s[i];
+            
+            //check if the character is already in the dic
+            //if it is, update its value (+1) 
+            if(allCharacters.ContainsKey(ch)){
+                allCharacters[ch]++;
+            }
+            
+            //if not, add it with value 1
+            else{
+                allCharacters.Add(ch,1);
+            }
+        }   
+        
+        //check to see which character in the string has value 1 in the dict
+        //start from left ( 0) to right( end of the string) 
+        //once it is found, stop the loop and return 
+           for (int i = 0; i < s.Length; i++){
+			if (allCharacters[s[i]] == 1) return i;
+		}
+		return -1;     
+        
+        
+    }
+}
+
