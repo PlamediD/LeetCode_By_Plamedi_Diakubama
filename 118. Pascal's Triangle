@@ -1,0 +1,44 @@
+/*
+Descriptio: 
+118. Pascal's Triangle
+Given an integer numRows, return the first numRows of Pascal's triangle.
+
+In Pascal's triangle, each number is the sum of the two numbers directly above it as shown:
+https://leetcode.com/problems/pascals-triangle/description/?envType=study-plan&id=data-structure-i
+
+*/
+/*
+Algo: 
+step1- Declare an 2-D array array of size n*n.
+
+step2- Iterate through line 0 to line n:
+
+           *Iterate through i=0 to present the  line:
+
+                  *check if present line is equal to i or i=0 than arr[line][i]=1 .
+
+                  *else update arr[line][i] to arr[line-1][i-1] + arr[line-1][i] .
+                  
+Time complexity: O(n^2) where n= numRows
+
+*/
+public class Solution {
+    public IList<IList<int>> Generate(int numRows) {
+        List<IList<int>> res = new();
+        
+        for(int i = 0; i < numRows; i++)
+        {
+            List<int> list = new();
+            for(int j = 0; j <= i; j++)
+            {
+                if(j == 0 || j == i)
+                    list.Add(1);
+                else
+                    list.Add(res[i-1][j-1] + res[i-1][j]);
+            }
+            res.Add(list);
+        }
+        
+        return res;
+    }
+}
