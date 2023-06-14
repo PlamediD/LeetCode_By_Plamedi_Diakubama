@@ -33,23 +33,24 @@ public class Solution {
             return; 
         }
         
+        int lastNonZero = 0; // Count of non-zero elements
 
-        int lastNonZero=0; 
-
-        // Traverse the array and move non-zero elements to the front
-        for(int i=0; i<nums.Length; i++){
-            if(nums[lastNonZero]!=0){
-                nums[lastNonZero]=nums[i]; 
-                lastNonZero++; 
-            }
-       
+    // Traverse the array and move non-zero elements to the front
+    for (int i = 0; i < nums.Length; i++)
+    {
+        if (nums[i] != 0)
+        {
+            nums[ lastNonZero] = nums[i];
+             lastNonZero++;
         }
+    }
 
-
-         // Fill the remaining positions with zeros
-        for(int i=lastNonZero+1; i<nums.Length; i++){
-            nums[i]=0; 
-        }
+    // Fill the remaining positions with zeros
+    while ( lastNonZero < nums.Length)
+    {
+        nums[ lastNonZero] = 0;
+         lastNonZero++;
+    }
        
     }
 }
