@@ -1,0 +1,65 @@
+/*
+Given an array of positive integers nums and a positive integer target, return the minimal length of a 
+subarray
+ whose sum is greater than or equal to target. If there is no such subarray, return 0 instead.
+
+ 
+
+Example 1:
+
+Input: target = 7, nums = [2,3,1,2,4,3]
+Output: 2
+Explanation: The subarray [4,3] has the minimal length under the problem constraint.
+Example 2:
+
+Input: target = 4, nums = [1,4,4]
+Output: 1
+Example 3:
+
+Input: target = 11, nums = [1,1,1,1,1,1,1,1]
+Output: 0
+*/
+
+/*
+
+Algorithm
+Create three integer variables left, right and sum. The variables left and right form a subarray by pointing to the starting and ending indices of the current subarray (or window), and sum stores the sum of this window. Intialize all of them with 0.
+Create another variable res to store the answer to the problem. We initialize it to a large integer value.
+We iterate over nums using right starting from right = 0 till nums.length - 1 incrementing right by 1 after each iteration. We perform the following inside this iteration:
+Add element at index right to the current window, incrementing sum by nums[right].
+We check if sum >= target. If so, we have a subarray that satisfies our condition. As a result, we attempt to update our answer variable with the length of this subarray. We perform res = min(res, right - left + 1). We then remove the first element from this window by reducing sumOfCurrentWindow by nums[left] and incrementing left by 1. This step is repeated in an inner loop as long as sumOfCurrentWindow >= target.
+The current window's sum is now smaller than target. We need to add more elements to it. As a result, right is incremented by 1.
+
+Time complexity: O(n) 
+Space : O(1) 
+*/
+
+public class Solution {
+    public int MinSubArrayLen(int target, int[] nums) {
+
+        int minLength=Int32.MaxValue; 
+        int left=0; 
+        int right=0; 
+        int length=nums.Length; 
+        int sum=0;
+        int temp=0; 
+
+      
+
+        while(left<length && right<length){
+            sum+=nums[left]; 
+            temp++; 
+            while(sum>=target){
+                minLength= Math.Min(minLength, temp); 
+            sum-=nums[right]; 
+            right++; 
+            temp--; 
+            }
+           
+            left++; 
+        }
+   
+         return minLength==Int32.MaxValue? 0 : minLength;
+        
+    }
+}
