@@ -20,6 +20,8 @@ Output: true
 Brute force: 
 The straight-forward solution is to compare every two meetings in the array, and see if they conflict with each other (i.e. if they overlap).
 Two meetings overlap if one of them starts while the other is still taking place.
+
+Time complexity: O(n^2) 
 */
 
 
