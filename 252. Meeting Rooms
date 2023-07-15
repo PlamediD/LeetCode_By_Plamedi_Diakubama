@@ -1,0 +1,73 @@
+/*
+252. Meeting Rooms
+Description: 
+Given an array of meeting time intervals where intervals[i] = [starti, endi], determine if a person could attend all meetings.
+
+ 
+
+Example 1:
+
+Input: intervals = [[0,30],[5,10],[15,20]]
+Output: false
+Example 2:
+
+Input: intervals = [[7,10],[2,4]]
+Output: true
+ 
+*/
+
+/*
+Brute force: 
+The straight-forward solution is to compare every two meetings in the array, and see if they conflict with each other (i.e. if they overlap).
+Two meetings overlap if one of them starts while the other is still taking place.
+*/
+
+
+public class Solution {
+    public bool CanAttendMeetings(int[][] intervals) {
+       for(int i=0; i<intervals.Length; i++){
+           for(int j=i+1; j<intervals.Length; j++){
+               if(overlap(intervals[i], intervals[j])){
+                   return false; 
+               }
+           }
+       }
+       return true;  
+    }
+
+    private bool overlap(int [] interval1, int [] interval2){
+        return (interval1[0]>=interval2[0]&& interval1[0]<interval2[1])||
+        (interval2[0]>=interval1[0]&& interval2[0]<interval1[1]);
+    }
+}
+
+/*
+The overlap condition in the code above can be written in a more concise way. 
+Consider two non-overlapping meetings. The earlier meeting ends before the later meeting begins. 
+Therefore, the minimum end time of the two meetings (which is the end time of the earlier meeting) is smaller than or equal the maximum start
+time of the two meetings (which is the start time of the later meeting).
+
+*/
+
+public class Solution {
+    public bool CanAttendMeetings(int[][] intervals) {
+       for(int i=0; i<intervals.Length; i++){
+           for(int j=i+1; j<intervals.Length; j++){
+               if(overlap(intervals[i], intervals[j])){
+                   return false; 
+               }
+           }
+       }
+       return true;  
+    }
+
+    private bool overlap(int [] interval1, int [] interval2){
+        return (Math.Min(interval1[1], interval2[1])>
+                Math.Max(interval1[0], interval2[0])
+            );
+        /*
+        (interval1[0]>=interval2[0]&& interval1[0]<interval2[1])||
+        (interval2[0]>=interval1[0]&& interval2[0]<interval1[1]);
+        */
+    }
+}
