@@ -1,0 +1,74 @@
+/*
+Description
+1099. Two Sum Less Than K
+Given an array nums of integers and integer k, return the maximum sum such that there exists i < j with nums[i] + nums[j] = sum and sum < k. If no i, j exist satisfying this equation, return -1.
+
+ 
+
+Example 1:
+
+Input: nums = [34,23,1,24,75,33,54,8], k = 60
+Output: 58
+Explanation: We can use 34 and 24 to sum 58 which is less than 60.
+Example 2:
+
+Input: nums = [10,20,30], k = 15
+Output: -1
+Explanation: In this case it is not possible to get a pair sum less that 15.
+*/
+
+//SOLUTION 
+public class Solution {
+    public int TwoSumLessThanK(int[] nums, int k) {
+        /*
+        //Brute force
+        Traverse the entire array, compute the sum at each index and chekc with current resuslts, 
+if it is bigger ( and still less than k), update maxSum
+        //Time complexity " O(n^2) 
+        int maxSum=-1; 
+        for (int i=0; i<nums.Length; i++){
+            for(int j=i+1; j <nums.Length; j++){
+                int sum=nums[i]+nums[j]; 
+                if(sum<k){
+                    maxSum=Math.Max(sum, maxSum); 
+                }
+            }
+        }
+        return maxSum; 
+        */
+
+        /*Two pointers 
+        //Sort the array 
+        //then one pointer starts at the left of the array and 
+        //the other on the right of the array
+        Add elements on both ends, if < k increment left and save maxSum as 
+        the max oftempSum and maxSum 
+        if > k decrement right 
+
+        Time complexity: O(n log n) due to sorting
+        the while loop//two pointers approach will probably just be O(n)
+        */
+
+        int maxSum= -1; 
+        Array.Sort( nums);
+        int left=0; 
+        int right =nums.Length-1; 
+        while(left< right){
+            int tempSum= nums[left]+nums[right]; 
+            if(tempSum<k){
+                maxSum=Math.Max(tempSum, maxSum); 
+                left++; 
+            }
+            else{
+                right--; 
+            }
+        }
+        return maxSum; 
+        /*
+        int maxSum=-1; 
+        Array.Sort(nums); 
+
+        return maxSum; 
+        */
+    }
+}
