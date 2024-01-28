@@ -53,9 +53,19 @@ Difficulty: Medium
 /*
 Solution: 
 Author: Plamedi Diakubama 
-Language used : C#
-Method : two pointers method 
+Language used: C#
+Method/Approach: two pointers method 
+slow and fast. The fast pointer is used to scan through the array.
+If the current number pointed by fast is different from the number slow - 2, it means this number hasn’t appeared more than twice, so we copy this number to the position pointed by slow and move slow one step forward.
+This way, we keep at most two duplicates for each number in the array. The length of the result array is represented by slow.
 
+Complexity
+Time complexity:
+O(n)
+
+
+Space complexity:
+O(1) in place 
 
 */
 public class Solution {
