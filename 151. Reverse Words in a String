@@ -1,0 +1,158 @@
+/*
+151. Reverse Words in a String
+
+Difficulty: Medium 
+
+Description: 
+Given an input string s, reverse the order of the words.
+
+A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space.
+
+Return a string of the words in reverse order concatenated by a single space.
+
+Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.
+
+ 
+
+Example 1:
+
+Input: s = "the sky is blue"
+Output: "blue is sky the"
+Example 2:
+
+Input: s = "  hello world  "
+Output: "world hello"
+Explanation: Your reversed string should not contain leading or trailing spaces.
+Example 3:
+
+Input: s = "a good   example"
+Output: "example good a"
+Explanation: You need to reduce multiple spaces between two words to a single space in the reversed string.
+ 
+
+Constraints:
+
+1 <= s.length <= 104
+s contains English letters (upper-case and lower-case), digits, and spaces ' '.
+There is at least one word in s.
+*/
+
+/*
+Author: Plamedi Diakubama
+Language used: C#
+
+
+Algorithm Explanation:
+Reverse the Entire String:
+
+Convert the input string s into a character array (charArray).
+Reverse the entire character array using the Reverse method.
+Reverse Each Word:
+
+Initialize start and end pointers to track the beginning and end of each word.
+Iterate through the character array:
+Find the start of a word by skipping spaces.
+Find the end of the word.
+Reverse the characters in the current word using the Reverse method.
+Move to the next word.
+Trim Leading and Trailing Spaces:
+
+Use the TrimSpaces method to remove leading, trailing, and extra spaces.
+Copy non-space characters to the beginning of the array and add a single space between words.
+Update the length variable to reflect the new length of the trimmed string.
+Convert to String:
+
+Convert the modified character array to a string using the new string(charArray, 0, length) constructor.
+Time Complexity:
+Reversing the entire string takes O(N), where N is the length of the input string.
+Reversing each word involves iterating through the words, and each character within a word is processed once. This also takes O(N).
+Trimming spaces involves iterating through the character array once. This operation is linear, O(N).
+The overall time complexity is O(N).
+
+Space Complexity:
+The space complexity is O(1) since the algorithm operates in-place, modifying the input character array without using additional data structures.
+In summary, the algorithm is efficient with linear time complexity and constant space complexity.
+
+*/
+
+public class Solution {
+    public string ReverseWords(string s) {
+        char[] charArray = s.ToCharArray();
+
+        // Reverse the entire string
+        Reverse(charArray, 0, charArray.Length - 1);
+
+        int start = 0;
+        int end = 0;
+
+        while (start < charArray.Length) {
+            // Find the start of a word
+            while (start < charArray.Length && charArray[start] == ' ') {
+                start++;
+            }
+
+            end = start;
+
+            // Find the end of the word
+            while (end < charArray.Length && charArray[end] != ' ') {
+                end++;
+            }
+
+            // Reverse the word
+            Reverse(charArray, start, end - 1);
+
+            // Move to the next word
+            start = end;
+        }
+
+        // Remove leading and trailing spaces
+        int length = TrimSpaces(charArray);
+
+        // Convert the char array to a string
+        return new string(charArray, 0, length);
+    }
+
+    private void Reverse(char[] charArray, int start, int end) {
+        while (start < end) {
+            char temp = charArray[start];
+            charArray[start] = charArray[end];
+            charArray[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    private int TrimSpaces(char[] charArray) {
+        int length = 0;
+        int index = 0;
+
+        while (index < charArray.Length) {
+            // Skip spaces
+            while (index < charArray.Length && charArray[index] == ' ') {
+                index++;
+            }
+
+            // Copy non-space characters
+            while (index < charArray.Length && charArray[index] != ' ') {
+                charArray[length] = charArray[index];
+                length++;
+                index++;
+            }
+
+            // Skip trailing spaces
+            while (index < charArray.Length && charArray[index] == ' ') {
+                index++;
+            }
+
+            // Add a space if there are more words
+            if (index < charArray.Length) {
+                charArray[length] = ' ';
+                length++;
+            }
+        }
+
+        return length;
+    }
+}
+
+
