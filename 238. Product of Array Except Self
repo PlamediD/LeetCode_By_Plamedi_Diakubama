@@ -1,0 +1,79 @@
+/*
+238. Product of Array Except Self
+
+Difficulty: Meidum
+
+Description: 
+Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
+
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+
+You must write an algorithm that runs in O(n) time and without using the division operation.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3,4]
+Output: [24,12,8,6]
+Example 2:
+
+Input: nums = [-1,1,0,-3,3]
+Output: [0,0,9,0,0]
+ 
+
+Constraints:
+
+2 <= nums.length <= 105
+-30 <= nums[i] <= 30
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+ 
+*/
+
+/*
+Language used: C#
+Author: Plamedi Diakubama 
+
+Algorithm Explanation:
+Compute the prefix products by iterating through the array from left to right, multiplying the previous prefix product by the current element.
+Compute the suffix products by iterating through the array from right to left, multiplying the previous suffix product by the current element.
+Multiply the corresponding prefix and suffix products for each element to get the final result.
+
+Time Complexity:
+The algorithm runs in O(n) time, where n is the length of the input array. This is achieved by iterating through the array three times.
+
+Space Complexity:
+The space complexity is O(n) as additional arrays (prefixProducts, suffixProducts, and result) of size n are used.
+*/
+
+public class Solution {
+    public int[] ProductExceptSelf(int[] nums) {
+        int n = nums.Length;
+        
+        int[] prefixProducts = new int[n];
+        int[] suffixProducts = new int[n];
+        
+        int prefixProduct = 1;
+        int suffixProduct = 1;
+        
+        // Compute prefix products
+        for (int i = 0; i < n; i++) {
+            prefixProducts[i] = prefixProduct;
+            prefixProduct *= nums[i];
+        }
+        
+        // Compute suffix products
+        for (int i = n - 1; i >= 0; i--) {
+            suffixProducts[i] = suffixProduct;
+            suffixProduct *= nums[i];
+        }
+        
+        // Compute the final result by multiplying prefix and suffix products
+        int[] result = new int[n];
+        for (int i = 0; i < n; i++) {
+            result[i] = prefixProducts[i] * suffixProducts[i];
+        }
+        
+        return result;
+    }
+}
