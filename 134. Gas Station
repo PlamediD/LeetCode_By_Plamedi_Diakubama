@@ -44,11 +44,12 @@ n == gas.length == cost.length
 */
 
 /*
+/*
 Initial Solution
+Language used : C#
+*/
 
-Certainly! The problem can be solved by iterating through the gas stations and checking if it is possible to complete a circuit starting from each station. Here's a possible implementation in C# with limited use of built-in functions:
 
-csharp
 Copy code
 public class Solution {
     public int CanCompleteCircuit(int[] gas, int[] cost) {
@@ -104,3 +105,46 @@ public class Solution {
         return -1;
     }
 }
+
+
+/*
+The second solution with improved time complexity 
+Algorithm Explanation:
+Calculate the total gas and total cost for the entire circuit.
+Use currentGas to keep track of the current gas surplus/deficit.
+If currentGas becomes negative at any station, reset the starting station to the next station and reset currentGas to 0.
+If the total gas is greater than or equal to the total cost, a solution exists, and the starting station is returned; otherwise, return -1.
+
+Time Complexity:
+The time complexity is O(N), where N is the number of gas stations. The algorithm iterates through the gas stations once.
+
+Space Complexity:
+The space complexity is O(1) as no additional data structures are used.
+
+*/
+
+public class Solution {
+    public int CanCompleteCircuit(int[] gas, int[] cost) {
+        int n = gas.Length;
+        int totalGas = 0;
+        int totalCost = 0;
+        int currentGas = 0;
+        int start = 0;
+
+        for (int i = 0; i < n; i++) {
+            totalGas += gas[i];
+            totalCost += cost[i];
+            currentGas += gas[i] - cost[i];
+
+            // If we can't reach the next station, reset start to the next station
+            if (currentGas < 0) {
+                start = i + 1;
+                currentGas = 0;
+            }
+        }
+
+        // If totalGas is greater than or equal to totalCost, a solution exists
+        return (totalGas >= totalCost) ? start : -1;
+    }
+}
+
