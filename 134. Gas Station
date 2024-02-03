@@ -42,3 +42,65 @@ n == gas.length == cost.length
 1 <= n <= 105
 0 <= gas[i], cost[i] <= 104
 */
+
+/*
+Initial Solution
+
+Certainly! The problem can be solved by iterating through the gas stations and checking if it is possible to complete a circuit starting from each station. Here's a possible implementation in C# with limited use of built-in functions:
+
+csharp
+Copy code
+public class Solution {
+    public int CanCompleteCircuit(int[] gas, int[] cost) {
+        int n = gas.Length;
+        
+        for (int start = 0; start < n; start++) {
+            int currentGas = 0;
+            int i = start;
+
+            do {
+                currentGas += gas[i] - cost[i];
+                i = (i + 1) % n;
+            } while (currentGas >= 0 && i != start);
+
+            if (currentGas >= 0) {
+                return start;
+            }
+        }
+
+        return -1;
+    }
+}
+Algorithm Explanation:
+Iterate through each gas station (start) as a potential starting point.
+Use a loop to simulate traveling in a circular route, updating the currentGas at each station.
+If at any point the currentGas becomes negative, move on to the next starting station.
+If the loop completes and currentGas is non-negative, return the current starting station as the answer. Otherwise, return -1.
+Time Complexity:
+The time complexity is O(N), where N is the number of gas stations. The algorithm iterates through each station once.
+Space Complexity:
+The space complexity is O(1) as no additional data structures are used.
+Issue: time limit exceeded 
+*/
+
+public class Solution {
+    public int CanCompleteCircuit(int[] gas, int[] cost) {
+        int n = gas.Length;
+        
+        for (int start = 0; start < n; start++) {
+            int currentGas = 0;
+            int i = start;
+
+            do {
+                currentGas += gas[i] - cost[i];
+                i = (i + 1) % n;
+            } while (currentGas >= 0 && i != start);
+
+            if (currentGas >= 0) {
+                return start;
+            }
+        }
+
+        return -1;
+    }
+}
