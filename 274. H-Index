@@ -29,3 +29,19 @@ n == citations.length
 0 <= citations[i] <= 1000
 
 */
+
+/*
+Author: Plamedi Diakubama
+Language used: C#
+
+Algorithm: 
+
+Time complexity: 
+Space complexity: 
+
+*/
+public class Solution {
+    public int HIndex(int[] citations) {
+        
+    }
+}
