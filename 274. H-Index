@@ -34,14 +34,43 @@ n == citations.length
 Author: Plamedi Diakubama
 Language used: C#
 
-Algorithm: 
-
-Time complexity: 
-Space complexity: 
 
 */
 public class Solution {
     public int HIndex(int[] citations) {
-        
+        int n = citations.Length;
+
+        // Sort the array in non-decreasing order
+        Sort(citations);
+
+        int hIndex = 0;
+
+        // Find the maximum h-index
+        for (int i = n - 1; i >= 0; i--) {
+            int h = n - i;
+            if (citations[i] >= h) {
+                hIndex = h;
+            } else {
+                break;
+            }
+        }
+
+        return hIndex;
+    }
+
+    private void Sort(int[] arr) {
+        // Implement a simple sorting algorithm (e.g., bubble sort)
+        int n = arr.Length;
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // Swap elements
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
     }
 }
