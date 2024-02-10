@@ -35,6 +35,17 @@ Author: Plamedi Diakubama
 Language used: C#
 
 
+Algorithm Explanation:
+Implement a simple sorting algorithm (e.g., bubble sort) to sort the citations array in non-decreasing order.
+Iterate through the sorted array in reverse to find the maximum h-index.
+Update the h-index if the current citation count is greater than or equal to the number of papers.
+
+Time Complexity:
+The time complexity is O(n^2) for the sorting step, where n is the length of the citations array. The overall time complexity is dominated by the sorting operation.
+
+Space Complexity:
+The space complexity is O(1) as no additional data structures are used except for a few variables.
+
 */
 public class Solution {
     public int HIndex(int[] citations) {
