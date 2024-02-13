@@ -33,6 +33,29 @@ It's guaranteed that you can reach nums[n - 1].
 */
 
 
+/*
+Language used : C#
+
+Approach
+This algorithm relies on three key ideas:
+
+The longest jump found is always the best
+We need to keep track of whether the previous longest jump has finished because there might be better jumps than the ones we found so far
+When the previous longest jump has finished, that means a jump was already made at the point of the longest jump found so far
+Using these 3 ideas we can solve the problem by tracking:
+
+Longest unconfirmed jumps
+Longest confirmed jumps
+Jump Count
+Once the longest confirmed jumps is at 0, we can lock in the unconfirmed jump as the new confirmed jump and increment the count.
+
+Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(1)
+*/
 
 public class Solution {
   
