@@ -1,5 +1,5 @@
 /*
-2. Integer to Roman
+12. Integer to Roman
 Difficulty: Medium 
 
 Description: 
@@ -45,3 +45,36 @@ Constraints:
 
 1 <= num <= 3999
 */
+
+
+/*
+Approach
+Add all possible roman alphabets and their corresponding values in two separate arrays in decreasing order.
+Now iterate the array looking for values equal to or less than than the given number.
+when found subtract that value unless it becomes greater than that roman value.
+Now go to step 2 and look for next value.
+Keep repeating this until number becomes 0.
+Complexity
+Space complexity:
+O(n) where n is constant ; k = 13
+*/
+public class Solution {
+    public string IntToRoman(int num) {
+        int[] values = new int[]{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        string[] symbols = new[]{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX","V", "IV","I"};
+    
+        StringBuilder romanValue = new StringBuilder();
+        for (int i = 0; i < 13 && num > 0; )
+        {
+            if (num >= values[i]) {
+                romanValue.Append(symbols[i]);
+                num = num - values[i];
+            }
+            else {
+                i++;
+            }
+        }
+
+        return romanValue.ToString();
+    }
+}
