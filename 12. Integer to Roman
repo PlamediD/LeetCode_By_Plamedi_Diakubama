@@ -48,15 +48,19 @@ Constraints:
 
 
 /*
-Approach
-Add all possible roman alphabets and their corresponding values in two separate arrays in decreasing order.
-Now iterate the array looking for values equal to or less than than the given number.
-when found subtract that value unless it becomes greater than that roman value.
-Now go to step 2 and look for next value.
-Keep repeating this until number becomes 0.
-Complexity
-Space complexity:
-O(n) where n is constant ; k = 13
+
+Algorithm Explanation:
+Create two arrays, one for the values of Roman symbols and one for the corresponding symbols.
+Iterate through the arrays, and for each value, subtract it from the given integer as long as it's greater than or equal to the value.
+Append the corresponding symbol to the result string.
+Repeat the process until the integer becomes 0.
+
+Time Complexity:
+The time complexity is O(1) since the number of iterations in the loop is constant.
+
+Space Complexity:
+The space complexity is O(1) as no additional data structures are used.
+
 */
 public class Solution {
     public string IntToRoman(int num) {
