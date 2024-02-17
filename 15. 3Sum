@@ -37,6 +37,22 @@ Constraints:
 -105 <= nums[i] <= 105
 */
 
+/*
+Language used : C#
+
+Algorithm Explanation:
+Sort the array to simplify the two-pointer approach.
+Iterate through the array, and for each element, use two pointers to find the other two elements whose sum is equal to the negation of the current element.
+Skip duplicates to avoid duplicate triplets.
+Update pointers based on the comparison of the current sum with the target sum.
+
+Time Complexity:
+The time complexity is O(n^2), where n is the length of the input array. The two-pointer approach involves nested loops.
+
+Space Complexity:
+The space complexity is O(1) as no additional data structures are used.
+*/
+
 public class Solution {
     public IList<IList<int>> ThreeSum(int[] nums) {
         IList<IList<int>> result = new List<IList<int>>();
