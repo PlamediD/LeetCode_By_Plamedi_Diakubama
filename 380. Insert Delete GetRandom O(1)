@@ -38,6 +38,11 @@ At most 2 * 105 calls will be made to insert, remove, and getRandom.
 There will be at least one element in the data structure when getRandom is called.
 */
 
+/*
+Getting this error that I need to find how to fix : 
+Line 15: Char 84: error CS0246: The type or namespace name 'RandomizedSet' could not be found (are you missing a using directive or an assembly reference?) (in __Driver__.cs)
+Line 30: Char 20: error CS0246: The type or namespace name 'RandomizedSet' could not be found (are you missing a using directive or an assembly reference?) (in __Driver__.cs)
+*/
 public class Solution {
     public IList<IList<int>> ThreeSum(int[] nums) {
         IList<IList<int>> result = new List<IList<int>>();
