@@ -42,6 +42,16 @@ Algorithm Explanation:
 Iterate through the existing intervals and insert the newInterval in the correct position.
 Merge overlapping intervals with the newInterval.
 Continue adding intervals before and after the newInterval.
+
+Time Complexity:
+The time complexity is O(N), where N is the number of intervals in the input array.
+The solution iterates through the existing intervals once, and the number of iterations is proportional to the number of intervals.
+
+
+Space Complexity:
+The space complexity is O(N), where N is the number of intervals in the input array.
+The space is used to store the result list, which can have at most N intervals.
+The input array is not modified in place, and the result is a separate list.
 */
 using System;
 using System.Collections.Generic;
