@@ -33,6 +33,16 @@ intervals is sorted by starti in ascending order.
 newInterval.length == 2
 0 <= start <= end <= 105
 */
+
+/*
+Language used: C#
+Author:Plamedi Diakubama
+
+Algorithm Explanation:
+Iterate through the existing intervals and insert the newInterval in the correct position.
+Merge overlapping intervals with the newInterval.
+Continue adding intervals before and after the newInterval.
+*/
 using System;
 using System.Collections.Generic;
 
