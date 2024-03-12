@@ -25,7 +25,23 @@ n == matrix.length == matrix[i].length
 */
 
 
+/*
+Author: Plamedi Diakubama
+Language used: C#
 
+Algorithm Explanation:
+Transpose the matrix by swapping elements across the main diagonal (i.e., swap matrix[i][j] with matrix[j][i]).
+Reverse the order of elements in each row.
+
+Time Complexity:
+The time complexity is O(n^2), where n is the size of the matrix.
+The solution iterates through each element in the matrix to perform swaps and reversals.
+
+Space Complexity:
+The space complexity is O(1).
+The rotation is performed in-place without using additional space.
+
+*/
 
 public class Solution {
     public void Rotate(int[][] matrix) {
