@@ -24,6 +24,35 @@ The number of nodes in the tree is in the range [1, 104].
 -231 <= Node.val <= 231 - 1
 */
 
+/*
+Author: Plamedi Diakubama 
+Language used: C#
+
+Algo: 
+Uses a depth-first traversal approach to traverse the tree and calculate the sum and count of nodes at each level. Then, it divides the sum by the count to find the average value of each level.
+
+Here's a breakdown of the algorithm:
+
+It initializes two lists: result to store the sum of values at each level and counter to store the count of nodes at each level.
+It calls the AvgOfLevels method with the root of the tree, initial level 1, result, and counter lists.
+In the AvgOfLevels method:
+If the current node is null, it returns.
+If the current level exceeds the size of the result list, it adds the value of the current node to the result list 
+and initializes the corresponding count in the counter list to 1.
+Otherwise, it increments the count of nodes and updates the sum at the current level in the result list.
+It recursively calls AvgOfLevels for the left and right subtrees with an increased level.
+After traversing the entire tree, it goes through the result list and divides each sum by the corresponding count to get the average value for each level.
+
+Time Complexity:
+The time complexity of this algorithm is O(N), where N is the number of nodes in the binary tree. 
+This is because the algorithm visits each node exactly once during the depth-first traversal.
+
+Space Complexity:
+The space complexity of this algorithm is also O(N), where N is the number of nodes in the binary tree. 
+This is due to the space used by the result and counter lists, as well as the recursion stack during the depth-first traversal, 
+which can go as deep as the height of the tree.
+*/
+
 public class Solution {
     public IList<double> AverageOfLevels(TreeNode root) {
        
