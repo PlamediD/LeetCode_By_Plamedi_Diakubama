@@ -23,3 +23,40 @@ Constraints:
 The number of nodes in the tree is in the range [1, 104].
 -231 <= Node.val <= 231 - 1
 */
+
+public class Solution {
+    public IList<double> AverageOfLevels(TreeNode root) {
+       
+        List<double> result = new List<double>();
+        List<int> counter = new List<int>();
+
+        AvgOfLevels(root, 1, result, counter);
+        for(int i = 0 ; i < result.Count; i++)
+        {
+            result[i]/= counter[i];
+        }
+        return result;
+    }
+
+    public void AvgOfLevels(TreeNode root, int level, IList<double> result, IList<int> counter)
+    {
+        if(root == null)
+            return;
+
+        if(result.Count < level)
+        {
+            result.Add(root.val);
+            counter.Add(1);
+        }
+        else
+        {
+            counter[level-1]++;
+            result[level-1] += root.val;
+        }
+
+        AvgOfLevels(root.left,level + 1,result, counter);
+        AvgOfLevels(root.right,level + 1,result, counter);
+
+
+    }
+}
