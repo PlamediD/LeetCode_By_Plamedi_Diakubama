@@ -35,6 +35,34 @@ Constraints:
 0 <= amount <= 104
 */
 
+/*
+Author: Plamedi Diakubama 
+Language used: C#
+
+
+Sure! Here's an explanation of the algorithm along with its time and space complexity:
+
+Algorithm Explanation:
+Dynamic Programming (DP) Approach: The idea is to iteratively build up the minimum number of coins needed to make up each amount from 0 to the target amount (amount).
+Initialization: Create an array dp of size amount + 1. Set all elements of dp to amount + 1 initially, except for dp[0] which is set to 0. 
+This represents the minimum number of coins needed to make up the amount 0, which is 0.
+Iteration: For each coin denomination in the coins array, iterate through the dp array from the value of the coin denomination to the target amount (amount).
+Update dp[i] with the minimum of its current value and dp[i - coin] + 1, where coin is the current coin denomination.
+This step ensures that we're considering the minimum number of coins needed to make up the amount i.
+Result: After the iteration, dp[amount] will contain the minimum number of coins needed to make up the target amount. 
+If dp[amount] is greater than amount, it means the target amount cannot be made up by any combination of coins, so return -1. Otherwise, return dp[amount].
+
+Time Complexity:
+Initialization: O(amount)
+Iteration: O(amount * n), where n is the number of coin denominations
+Total Time Complexity: O(amount * n)
+
+Space Complexity:
+The space complexity is O(amount) for the dp array.
+
+*/
+
+
 public class Solution {
     public int CoinChange(int[] coins, int amount) {
         int[] dp = new int[amount + 1];
