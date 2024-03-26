@@ -29,6 +29,11 @@ board[i][j] is a lowercase English letter.
 /*
 Author: Plamedi Diakubama 
 Language used: C#
+
+Algo:
+
+Time complexity : 
+Space complexity: 
 */
 using System;
 using System.Collections.Generic;
