@@ -29,6 +29,19 @@ The number of nodes in the list is n.
 Author: Plamedi Diakubama 
 Language used: C#
 
+Algorithm:
+
+We maintain a dummy node to simplify the logic, and prev to track the node before the sublist we're currently processing.
+Iterate through the list while there are enough nodes for a sublist of size k.
+For each sublist, find the tail node by traversing k nodes.
+Reverse the sublist between head and tail using the Reverse method.
+Connect the reversed sublist to the overall list.
+Update prev, head, and continue until the end of the list.
+Return the modified list.
+
+Time complexity: The time complexity of this algorithm is O(n), where n is the number of nodes in the linked list. We traverse each node of the list once.
+
+Space complexity: The space complexity is O(1) as we are not using any extra space that grows with the input size. We're only using a constant amount of extra space for variables and pointers.
 */
 
 public class ListNode {
