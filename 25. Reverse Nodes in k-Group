@@ -24,3 +24,60 @@ The number of nodes in the list is n.
  
 
 */
+
+/*
+Author: Plamedi Diakubama 
+Language used: C#
+
+*/
+
+public class ListNode {
+    public int val;
+    public ListNode next;
+    public ListNode(int val = 0, ListNode next = null) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
+public class Solution {
+    public ListNode ReverseKGroup(ListNode head, int k) {
+        if (head == null || k == 1)
+            return head;
+        
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode prev = dummy;
+        
+        while (head != null) {
+            ListNode tail = prev;
+            for (int i = 0; i < k; i++) {
+                tail = tail.next;
+                if (tail == null)
+                    return dummy.next;
+            }
+            
+            ListNode nextHead = tail.next;
+            (head, tail) = Reverse(head, tail);
+            prev.next = head;
+            tail.next = nextHead;
+            prev = tail;
+            head = nextHead;
+        }
+        
+        return dummy.next;
+    }
+    
+    private (ListNode, ListNode) Reverse(ListNode head, ListNode tail) {
+        ListNode prev = tail.next;
+        ListNode curr = head;
+        while (prev != tail) {
+            ListNode nextNode = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        return (tail, head);
+    }
+}
+
