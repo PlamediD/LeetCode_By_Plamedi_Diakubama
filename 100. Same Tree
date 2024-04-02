@@ -22,6 +22,41 @@ The number of nodes in both trees is in the range [0, 100].
 -104 <= Node.val <= 104
 */
 
+/*
+Language used: C#
+*/
+/*
+Approach 1 : 
+To check if two binary trees are the same or not, we can perform a recursive depth-first search (DFS) traversal of both trees simultaneously. 
+At each step, we compare the values of the current nodes in both trees. 
+If the values are equal and both nodes have the same structure (i.e., both left and right children are the same), we continue recursively checking their left and right subtrees.
+If any node in one tree has a different value or a different structure compared to the other tree, we return false. 
+If we reach the end of both trees without finding any differences, we return true.
+
+The time complexity of O(n), where n is the number of nodes in the binary trees, as we need to traverse each node once. 
+
+The space complexity is O(h), where h is the height of the trees, due to the recursion stack. 
+In the worst case, when the trees are skewed, the space complexity can be O(n).
+*/
+
+/*
+Approach 2: 
+Approach
+Enqueue the root nodes of both trees into the queue.
+Dequeue a pair of nodes from the queue.
+If both nodes are null, continue to the next pair.
+If one node is null and the other is not, or their values don’t match, return false.
+Enqueue the left and right children of both nodes into the queue.
+Repeat the process until the queue is empty.
+Complexity
+Time complexity:
+The time complexity is O(N), where N is the total number of nodes in the binary trees. In each step, we perform constant-time operations, and in the worst case, we need to visit each node once.
+
+Space complexity:
+The space complexity is O(Min(H1, H2)), where H1 and H2 are the heights of the two binary trees. 
+This is because the space required for the queue is proportional to the maximum number of nodes at any level. 
+In the worst case, when the trees are completely unbalanced, the space complexity approaches O(N).
+*/
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -35,6 +70,39 @@ The number of nodes in both trees is in the range [0, 100].
  *     }
  * }
  */
+public class Solution {
+    public bool IsSameTree(TreeNode p, TreeNode q) {
+        // Base case: If both nodes are null, they are the same
+        if (p == null && q == null)
+            return true;
+        
+        // If one node is null and the other is not, they are different
+        if (p == null || q == null)
+            return false;
+        
+        // If values of the nodes are different, they are different trees
+        if (p.val != q.val)
+            return false;
+        
+        // Recursively check left and right subtrees
+        return IsSameTree(p.left, q.left) && IsSameTree(p.right, q.right);
+    }
+}
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
 public class Solution {
     public bool IsSameTree(TreeNode p, TreeNode q) {
         Queue<TreeNode> queue = new Queue<TreeNode>();
