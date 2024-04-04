@@ -31,3 +31,38 @@ s contains only lowercase English letters and spaces ' '.
 s does not contain any leading or trailing spaces.
 All the words in s are separated by a single space.
 */
+
+/*
+Author: Plamedi Diakubama
+Language used: C#
+
+*/
+public class Solution {
+    public bool WordPattern(string pattern, string s) {
+        string[] words = s.Split(' ');
+        
+        if (pattern.Length != words.Length)
+            return false;
+        
+        Dictionary<char, string> charToWord = new Dictionary<char, string>();
+        HashSet<string> usedWords = new HashSet<string>();
+        
+        for (int i = 0; i < pattern.Length; i++) {
+            char c = pattern[i];
+            string word = words[i];
+            
+            if (charToWord.ContainsKey(c)) {
+                if (charToWord[c] != word)
+                    return false;
+            } else {
+                if (usedWords.Contains(word))
+                    return false;
+                
+                charToWord[c] = word;
+                usedWords.Add(word);
+            }
+        }
+        
+        return true;
+    }
+}
