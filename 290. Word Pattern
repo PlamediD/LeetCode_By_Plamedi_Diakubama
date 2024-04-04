@@ -35,7 +35,13 @@ All the words in s are separated by a single space.
 /*
 Author: Plamedi Diakubama
 Language used: C#
+Explanation: 
 
+To solve this problem, we can use a hash map to store the mapping between characters in the pattern and words in the string. 
+We iterate through each character in the pattern and each word in the string simultaneously. At each step, we check if the current character in the pattern already exists in the map. 
+If it does, we compare the mapped word with the current word in the string. If they are different, we return false. 
+If the current character is not in the map, but the current word in the string is already mapped to another character, we return false as well.
+Otherwise, we add the current character and word to the map.
 */
 public class Solution {
     public bool WordPattern(string pattern, string s) {
