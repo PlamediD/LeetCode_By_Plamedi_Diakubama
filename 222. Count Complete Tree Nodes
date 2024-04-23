@@ -32,3 +32,47 @@ The number of nodes in the tree is in the range [0, 5 * 104].
 0 <= Node.val <= 5 * 104
 The tree is guaranteed to be complete.
 */
+
+public class TreeNode {
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
+    public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+public class Solution {
+    public int CountNodes(TreeNode root) {
+        if (root == null)
+            return 0;
+        
+        int leftHeight = GetLeftHeight(root);
+        int rightHeight = GetRightHeight(root);
+        
+        if (leftHeight == rightHeight)
+            return (1 << leftHeight) - 1; // Equivalent to 2^leftHeight - 1
+        else
+            return CountNodes(root.left) + CountNodes(root.right) + 1;
+    }
+    
+    private int GetLeftHeight(TreeNode node) {
+        int height = 0;
+        while (node != null) {
+            height++;
+            node = node.left;
+        }
+        return height;
+    }
+    
+    private int GetRightHeight(TreeNode node) {
+        int height = 0;
+        while (node != null) {
+            height++;
+            node = node.right;
+        }
+        return height;
+    }
+}
